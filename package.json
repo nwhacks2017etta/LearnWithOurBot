@@ -4,6 +4,7 @@
   "description": "Learning in a particular domain",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/nwhacks2017etta/LearnWithOurBot#readme",
   "dependencies": {
+    "apiai": "^4.0.1",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "request": "^2.81.0"
