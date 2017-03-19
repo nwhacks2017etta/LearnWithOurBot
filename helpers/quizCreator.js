@@ -75,9 +75,29 @@ quizQuestions.child(i).child("option").on("value", function(snapshot) {
   console.log(newQuestion);
   questionList.push(newQuestion);
         }
-
-        console.log(questionList.toString());
-        
+console.log(questionList.length +"new");
+for(var q in questionList){
+    console.log(q.question);
+    console.log(q.option);
+                request({
+            url: 'https://graph.facebook.com/v2.6/me/messages',
+            qs: { access_token: FACEBOOK_ACCESS_TOKEN },
+            method: 'POST',
+            json: {
+                recipient: { id: senderId },
+                "message": {
+                    "attachment":{
+                        "type":"template",
+                        "payload":{
+                            "template_type":"button",
+                            "text":q.question,
+                            "buttons":q.option
+                        }
+                    }
+                }
+            }
+        });
+}
 
 });
 }
