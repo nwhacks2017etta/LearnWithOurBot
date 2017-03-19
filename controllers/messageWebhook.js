@@ -1,5 +1,6 @@
 const processMessage = require('../helpers/processMessage');
 const quizGenerator = require('../helpers/quizGenerator');
+const youtubeMessage = require('../helpers/youtubeVideo');
 
 module.exports = (req, res) => {
     if(req.body.object === 'page') {
@@ -8,10 +9,11 @@ module.exports = (req, res) => {
 
                 var keyword = event.message.text.split(" ")[0];
 
-                if (keyword == "quiz") {
+                if (keyword == "search") {
+                    youtubeMessage(event);
+                } else if (keyword = "quiz") {
                     quizGenerator(event);
-                }
-                else if(event.message && event.message.text) {
+                } else if(event.message && event.message.text) {
                     processMessage(event);
                 }
             });
