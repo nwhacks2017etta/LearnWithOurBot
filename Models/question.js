@@ -1,12 +1,7 @@
-
-class Question {
-    constructor(id, options, answer) {
-        this.id = id;
+function Question(question, options, answer) {
+        this.question = question;
         this.options = options;
         this.answer = answer;
     }
 
-    // exports.getQuestion = function(){
-        
-    // }
-}
+    module.exports = Question;

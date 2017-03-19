@@ -1,9 +1,9 @@
 const FACEBOOK_ACCESS_TOKEN = 'EAAgxPAHgXhQBADezB6dYP4U98LPYiVZCWtXCzjbhuaQpLmImyaoZAWF30qoQZCl3tc7Y7qyANruVrVWh2l39rBMOPwq69yrOoOlowNk7dS8ADurdN66LqNK5BPrtusIZA0ocA1ZAigFu4CB40p4YSgGahTNsBNbbYc3ZA0L20oGAZDZD';
 
 const request = require('request');
-var quizModel = require("../Models/quiz.js");
+var Quiz = require("../Models/quiz.js");
 
-var questionModel = require("../Models/question.js");
+var Question = require("../Models/question.js");
 
 var firebase = require('firebase');
 console.log("here2");
@@ -27,10 +27,9 @@ quizTakers.orderByKey().on("value", function(snapshot) {
 
  //need to get the question list
 var quizQuestions = firebase.app().database().ref("QuizQuestions");
-quizQuestions.orderByKey().on("child_added", function(snapshot) {
-  console.log(snapshot.key);
-  console.log(snapshot.value);
-});
+quizQuestions.child(1).child("option").on("value", function(snapshot) {
+    console.log("The " + snapshot.key + " dinosaur's score is " + snapshot.val());
+  });
 
 
 module.exports = (event) => {
@@ -38,7 +37,7 @@ module.exports = (event) => {
     const message = event.message.text;
 
     var familiarLevel;
-    var questions = [];
+    var questionList = [];
     //familiarity level
     quizTakers.orderByKey().on("value", function(snapshot) {
         snapshot.forEach(function(data) {
@@ -51,13 +50,34 @@ module.exports = (event) => {
         //we can add a new value later?
         //assume familiarity level is bounded by the number of questions
         if(!familiarLevel){
-            familiarLevel = 0;
+            familiarLevel = 3;
         }
-    
 
+        var answer;
+        var question;
+        var option = [];
+         var newQuestion = new Question(question, option, answer);
+        for(var i = 1; i <= familiarLevel; i++ ){
+            console.log(i);
+            quizQuestions.child(i).child("answer").on("value", function(snapshot) {
+    answer = snapshot.val();
+    console.log(answer);
+  });
+  quizQuestions.child(i).child("question").on("value", function(snapshot) {
+    question = snapshot.val();
+    console.log(question);
+  });
+quizQuestions.child(i).child("option").on("value", function(snapshot) {
+    option = snapshot.val();
+    console.log(option);
+  });
+  var newQuestion = new Question(question, option, answer);
+  console.log(newQuestion);
+  questionList.push(newQuestion);
+        }
 
-
-    var questionList = [];
+        console.log(questionList.toString());
+        
 
 });
 }
