@@ -7,14 +7,20 @@ module.exports = (req, res) => {
         req.body.entry.forEach(entry => {
             entry.messaging.forEach(event => {
 
-                var keyword = event.message.text.split(" ")[0];
+                if (event.postback) {
+                    quizGenerator.handlePostback(event);
+                } else {
 
-                if (keyword == "search") {
-                    youtubeMessage(event);
-                } else if (keyword = "quiz") {
-                    quizGenerator(event);
-                } else if(event.message && event.message.text) {
-                    processMessage(event);
+                    var keyword = event.message.text.split(" ")[0];
+
+                    if (keyword == "search") {
+                        youtubeMessage(event);
+                    } else if (keyword == "quiz") {
+                        quizGenerator.handleQuiz(event);
+                    } else if(event.message && event.message.text) {
+                        processMessage(event);
+                    }
+
                 }
             });
         });   
