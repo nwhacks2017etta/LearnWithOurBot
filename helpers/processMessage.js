@@ -1,4 +1,4 @@
-const FACEBOOK_ACCESS_TOKEN = 'EAAZA37GF4SrcBAH5ZC4hRZBiAhtZAiNTBVMIHzgusThmrFdaMGEHkyuJ5tVc9yGkZAXKer4XND1VMgRMzyHXbZBTdzyAVoZBsT4iZAosWEBd68DkcUiddfYxxAGsFuofWsVMZB2rcK0vQvfp7GrD7wERyyryYUxAeLLZBa4cFbT4fsXAZDZD';
+const FACEBOOK_ACCESS_TOKEN = 'EAADNbvWjXEkBAFyEwucaBAr8lZB2WQ0nryu3WrQ3lNWNG7BNFfWmpdk8iFsmwS2n9isGeS9JuYGGBpC5zOSOAR5V45eaSQgqhuDbBOnnAyQEi2m1DJ50AWZAveltFOsSH0ndZAwUmzHHpAZBXLvaSsuF9P4QVGgPDcVjpqJ1WQZDZD';
 const DOGE_IMAGE_URL = 'https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg';
 
 const request = require('request');
