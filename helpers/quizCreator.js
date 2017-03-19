@@ -1,9 +1,9 @@
 const FACEBOOK_ACCESS_TOKEN = 'EAAgxPAHgXhQBADezB6dYP4U98LPYiVZCWtXCzjbhuaQpLmImyaoZAWF30qoQZCl3tc7Y7qyANruVrVWh2l39rBMOPwq69yrOoOlowNk7dS8ADurdN66LqNK5BPrtusIZA0ocA1ZAigFu4CB40p4YSgGahTNsBNbbYc3ZA0L20oGAZDZD';
 
 const request = require('request');
-//var quizModel = require("../Models/quiz.js");
+var quizModel = require("../Models/quiz.js");
 
-//var quizModel = require("../Models/questions.js");
+var questionModel = require("../Models/question.js");
 
 var firebase = require('firebase');
 console.log("here2");
