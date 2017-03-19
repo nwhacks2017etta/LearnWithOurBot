@@ -1,6 +1,7 @@
 const processMessage = require('../helpers/processMessage');
 const quizGenerator = require('../helpers/quizGenerator');
 const youtubeMessage = require('../helpers/youtubeVideo');
+const quizCreator = require('../helpers/quizCreator.js');
 
 module.exports = (req, res) => {
     if(req.body.object === 'page') {
