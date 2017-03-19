@@ -11,14 +11,17 @@ module.exports = (req, res) => {
                     quizGenerator.handlePostback(event);
                 } else {
 
-                    var keyword = event.message.text.split(" ")[0];
+                    if (event.message && event.message.text) {
+                        var keyword = event.message.text.split(" ")[0];
 
-                    if (keyword == "search") {
-                        youtubeMessage(event);
-                    } else if (keyword == "quiz") {
-                        quizGenerator.handleQuiz(event);
-                    } else if(event.message && event.message.text) {
-                        processMessage(event);
+                        if (keyword == "search") {
+                            youtubeMessage(event);
+                        } else if (keyword == "quiz") {
+                            quizGenerator.handleQuiz(event);
+                        } else {
+                            processMessage(event);
+                        }
+
                     }
 
                 }
