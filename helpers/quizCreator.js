@@ -38,6 +38,7 @@ module.exports = (event) => {
     const message = event.message.text;
 
     var familiarLevel;
+    var questions = [];
     //familiarity level
     quizTakers.orderByKey().on("value", function(snapshot) {
         snapshot.forEach(function(data) {
@@ -48,11 +49,15 @@ module.exports = (event) => {
 
         //it doesn't exist in the database
         //we can add a new value later?
+        //assume familiarity level is bounded by the number of questions
         if(!familiarLevel){
             familiarLevel = 0;
         }
-        
+    
+
+
 
     var questionList = [];
 
-};
+});
+}
