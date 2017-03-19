@@ -1,5 +1,4 @@
-const FACEBOOK_ACCESS_TOKEN = 'EAAgxPAHgXhQBADezB6dYP4U98LPYiVZCWtXCzjbhuaQpLmImyaoZAWF30qoQZCl3tc7Y7qyANruVrVWh2l39rBMOPwq69yrOoOlowNk7dS8ADurdN66LqNK5BPrtusIZA0ocA1ZAigFu4CB40p4YSgGahTNsBNbbYc3ZA0L20oGAZDZD';
-
+const FACEBOOK_ACCESS_TOKEN = 'EAADNbvWjXEkBAKKNADN9abtlNDiY5jbwlwANCcVfHjGIrHqb4LzlfWPNouwolvMzPIZBSefr8udQkMZC33Fyt3PgDBa5DEhtZBA7SFWT00qyTZAarNrCLJBLC6sH7H2pYpa8bPAQ3bVeJaiuzOJVB5CEIUE21HU4tZAK5BSSG2wZDZD';
 const request = require('request');
 var Quiz = require("../Models/quiz.js");
 
@@ -57,47 +56,52 @@ module.exports = (event) => {
         var question;
         var option = [];
          var newQuestion = new Question(question, option, answer);
-        for(var i = 1; i <= familiarLevel; i++ ){
-            console.log(i);
-            quizQuestions.child(i).child("answer").on("value", function(snapshot) {
+
+            quizQuestions.child(1).child("answer").on("value", function(snapshot) {
     answer = snapshot.val();
     console.log(answer);
-  });
-  quizQuestions.child(i).child("question").on("value", function(snapshot) {
+    });
+      quizQuestions.child(1).child("question").on("value", function(snapshot) {
     question = snapshot.val();
     console.log(question);
-  });
-quizQuestions.child(i).child("option").on("value", function(snapshot) {
+    quizQuestions.child(1).child("option").on("value", function(snapshot) {
     option = snapshot.val();
     console.log(option);
-  });
-  var newQuestion = new Question(question, option, answer);
-  console.log(newQuestion);
-  questionList.push(newQuestion);
-        }
-console.log(questionList.length +"new");
-for(var q in questionList){
-    console.log(q.question);
-    console.log(q.option);
-                request({
+    var title1 = !!option[0];
+    var title2 = !!option[1];
+      request({
             url: 'https://graph.facebook.com/v2.6/me/messages',
             qs: { access_token: FACEBOOK_ACCESS_TOKEN },
             method: 'POST',
             json: {
                 recipient: { id: senderId },
-                "message": {
-                    "attachment":{
-                        "type":"template",
-                        "payload":{
-                            "template_type":"button",
-                            "text":q.question,
-                            "buttons":q.option
-                        }
-                    }
-                }
+                 "message":{
+    "attachment":{
+      "type":"template",
+      "payload":{
+        "template_type":"button",
+        "text": question,
+"buttons":[
+          {
+            "type":"web_url",
+            "url":"https://google.com",
+            "title": "true"
+          },
+          {
+            "type":"postback",
+            "title": "false",
+            "payload":"USER_DEFINED_PAYLOAD"
+          }
+        ]
+      }
+    }
+                 }
             }
         });
-}
+  });
+
+
+  });
 
 });
 }
