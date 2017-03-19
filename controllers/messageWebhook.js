@@ -19,7 +19,7 @@ module.exports = (req, res) => {
                             youtubeMessage(event);
                         } else if (keyword == "quiz") {
                             quizGenerator.handleQuiz(event);
-                        }else if (keyword = "!"){
+                        }else if (keyword == "quizme"){
                             quizCreator(event);
                         }else {
                             processMessage(event);
