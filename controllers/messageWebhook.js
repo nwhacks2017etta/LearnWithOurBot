@@ -5,16 +5,16 @@ module.exports = (req, res) => {
     if(req.body.object === 'page') {
         req.body.entry.forEach(entry => {
             entry.messaging.forEach(event => {
-                //format is search {videoname}
+                if(event.message && event.message.text) {
                 var keyword = event.message.text.split(" ")[0];
                 
                 if(keyword == "search"){
-                    console.log("here");
                     youtubeMessage(event);
                 }
-            //    if(event.message && event.message.text) {
-            //        processMessage(event);
-            //    }
+               else {
+                   processMessage(event);
+               }
+                }
             });
         });   
 
