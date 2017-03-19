@@ -1,10 +1,17 @@
 const processMessage = require('../helpers/processMessage');
+const quizGenerator = require('../helpers/quizGenerator');
 
 module.exports = (req, res) => {
     if(req.body.object === 'page') {
         req.body.entry.forEach(entry => {
             entry.messaging.forEach(event => {
-                if(event.message && event.message.text) {
+
+                var keyword = event.message.text.split(" ")[0];
+
+                if (keyword == "quiz") {
+                    quizGenerator(event);
+                }
+                else if(event.message && event.message.text) {
                     processMessage(event);
                 }
             });
